@@ -4,7 +4,7 @@ from sqlalchemy import orm
 from .db_session import SqlAlchemyBase
 
 
-class Jobs(SqlAlchemyBase):
+class Job(SqlAlchemyBase):
     __tablename__ = 'jobs'
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
@@ -12,8 +12,8 @@ class Jobs(SqlAlchemyBase):
     job = sqlalchemy.Column(sqlalchemy.String)
     work_size = sqlalchemy.Column(sqlalchemy.Integer)
     collaborators = sqlalchemy.Column(sqlalchemy.String)
-    start_date = sqlalchemy.Column(sqlalchemy.DateTime)
-    end_date = sqlalchemy.Column(sqlalchemy.DateTime)
-    is_finished = sqlalchemy.Column(sqlalchemy.Boolean)
+    start_date = sqlalchemy.Column(sqlalchemy.DateTime, nullable=True)
+    end_date = sqlalchemy.Column(sqlalchemy.DateTime, nullable=True)
+    is_finished = sqlalchemy.Column(sqlalchemy.Boolean, default=False)
 
     user = orm.relationship('User')
