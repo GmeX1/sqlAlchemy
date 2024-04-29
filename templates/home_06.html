@@ -1,0 +1,23 @@
+{% extends "index.html" %}
+{% block content %}
+<form
+        class="form border rounded p-3 mx-auto"
+        action="/register"
+        method="POST"
+        id="my-form"
+        style="width: 500px;background-color: #f9dbbb;"
+>
+    <h1>Register Form</h1>
+    <div>{{ form.csrf_token }}</div>
+    {% for field, errors in form.errors.items() %}
+    <p class="alert alert-danger" role="alert">
+        {{ form[field].label }}: {{ ', '.join(errors) }}
+    </p>
+    {% endfor %}
+    {% for field in form if field.name not in ['csrf_token', 'submit'] %}
+    <label for="{{ field.name }}" class="my-2">{{ field.label }}</label>
+    {{ field(class='form-control') }}
+    {% endfor %}
+    {{ form.submit(type="submit", class="btn btn-primary my-2") }}
+</form>
+{% endblock %}
